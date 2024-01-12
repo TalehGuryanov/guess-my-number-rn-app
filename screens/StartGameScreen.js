@@ -1,7 +1,10 @@
-import { View, TextInput, StyleSheet, Alert } from 'react-native';
+import {View, TextInput, StyleSheet, Alert, Text} from 'react-native';
 import {PrimaryButton} from "../components/PrimaryButton";
 import {useState} from "react";
 import {COLORS} from "../constants/colors";
+import {Title} from "../components/Title";
+import {Card} from "../components/Card";
+import {InstructionText} from "../components/InstructionText";
 
 export const StartGameScreen = ({onPickNumber}) => {
   const [enteredNumber, setEnteredNumber] = useState('');
@@ -32,39 +35,37 @@ export const StartGameScreen = ({onPickNumber}) => {
   }
   
   return (
-      <View style={styles.inputContainer}>
-        <TextInput
-            style={styles.input}
-            maxLength={2}
-            keyboardType={"number-pad"}
-            onChangeText={numberInputHandler}
-            value={enteredNumber}
-        />
-        <View style={styles.buttonsContainer}>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+      <View style={styles.rootContainer}>
+        <Title>Start a new game!</Title>
+        <Card>
+          <InstructionText>
+            Enter a number
+          </InstructionText>
+          <TextInput
+              style={styles.input}
+              maxLength={2}
+              keyboardType={"number-pad"}
+              onChangeText={numberInputHandler}
+              value={enteredNumber}
+          />
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+            </View>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+            </View>
           </View>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-          </View>
-        </View>
+        </Card>
       </View>
   )
 }
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    alignItems: 'center',
+  rootContainer: {
+    flex: 1,
     marginTop: 100,
-    marginHorizontal: 24,
-    padding: 16,
-    backgroundColor: COLORS.primary3,
-    borderRadius: 8,
-    elevation: 4,
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.25
+    alignItems: 'center',
   },
   input: {
     height: 50,

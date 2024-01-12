@@ -1,8 +1,11 @@
-import {Text, View, StyleSheet, Alert} from "react-native";
+import {View, StyleSheet, Alert} from "react-native";
+import {Ionicons} from '@expo/vector-icons';
 import {Title} from "../components/Title";
 import {useState, useEffect, useMemo} from "react";
 import {NumberContainer} from "../components/game/NumberContainer";
 import {PrimaryButton} from "../components/PrimaryButton";
+import {Card} from "../components/Card";
+import {InstructionText} from "../components/InstructionText";
 
 let maxBoundary = 100;
 let minBoundary = 1;
@@ -50,21 +53,21 @@ export const GameScreen = ({userNumber, onGameOver}) => {
       <View style={styles.screen}>
         <Title>Opponent's guess</Title>
         <NumberContainer>{currentGuess}</NumberContainer>
-        <View>
-          <Text>Higher or Lower?</Text>
-        </View>
-        <View>
-          <Text>Log Rounds</Text>
+        <Card>
+          <InstructionText style={styles.instructionText}>Higher or Lower?</InstructionText>
           <View style={styles.buttons}>
-            <PrimaryButton onPress={nextGuessHandler.bind(null, 'lower')}>
-              -
-            </PrimaryButton>
-            <PrimaryButton onPress={nextGuessHandler.bind(null, 'greater')}>
-              +
-            </PrimaryButton>
-          </View>
-        </View>
-        {currentGuess === userNumber && <Text>You guessed it!</Text>}
+              <View style={styles.button}>
+                <PrimaryButton onPress={nextGuessHandler.bind(null, 'lower')}>
+                  <Ionicons name={"md-remove"} size={24}/>
+                </PrimaryButton>
+              </View>
+              <View style={styles.button}>
+                <PrimaryButton onPress={nextGuessHandler.bind(null, 'greater')}>
+                  <Ionicons name={"md-add"} size={24}/>
+                </PrimaryButton>
+              </View>
+            </View>
+        </Card>
       </View>
   );
 }
@@ -74,9 +77,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
+  instructionText: {
+    marginBottom: 12,
+  },
   buttons: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  },
+  button: {
+    flex: 1,
   }
 })
