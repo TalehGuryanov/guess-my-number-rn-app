@@ -18,8 +18,7 @@ export default function App() {
   });
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(false);
-  
-  console.log(fontsLoaded, fontError)
+  const [rounds, setRounds] = useState(0);
   
   const startGameHandler = (selectedNumber) => {
     setUserNumber(selectedNumber);
@@ -32,16 +31,21 @@ export default function App() {
   const restartGameHandler = () => {
     setGameIsOver(false);
     setUserNumber(null);
+    setRounds(0);
+  }
+  
+  const calculateRounds = () => {
+    setRounds(rounds + 1);
   }
   
   let screen = <StartGameScreen onPickNumber={startGameHandler}/>;
   
   if(userNumber) {
-    screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>;
+    screen = <GameScreen onCalcRounds={calculateRounds} userNumber={userNumber} onGameOver={gameOverHandler}/>;
   }
   
   if(gameIsOver) {
-    screen = <GameOverScreen userNumber={userNumber} onRestart={restartGameHandler}/>;
+    screen = <GameOverScreen rounds={rounds} userNumber={userNumber} onRestart={restartGameHandler}/>;
   }
   
   const onLayoutRootView = useCallback(async () => {
