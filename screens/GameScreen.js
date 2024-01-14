@@ -6,6 +6,7 @@ import {NumberContainer} from "../components/game/NumberContainer";
 import {PrimaryButton} from "../components/PrimaryButton";
 import {Card} from "../components/Card";
 import {InstructionText} from "../components/InstructionText";
+import {GuessLogItem} from "../components/game/GuessLogItem";
 
 let maxBoundary = 100;
 let minBoundary = 1;
@@ -56,6 +57,7 @@ export const GameScreen = ({userNumber, onGameOver, onCalcRounds}) => {
     onCalcRounds();
     setGuessRounds((prevState) => [newRndNumber, ...prevState])
   }
+  const guessRoundsLength = useMemo(() => guessRounds.length, [guessRounds]);
 
   return (
       <View style={styles.screen}>
@@ -76,15 +78,16 @@ export const GameScreen = ({userNumber, onGameOver, onCalcRounds}) => {
               </View>
             </View>
         </Card>
-        <FlatList
-            data={guessRounds}
-            keyExtractor={item => item.toString()}
-            renderItem={({item}) => (
-                <View>
-                  <InstructionText>{item}</InstructionText>
-                </View>
-            )}
-        />
+        <View style={styles.listWr}>
+          <FlatList
+              data={guessRounds}
+              keyExtractor={item => item.toString()}
+              renderItem={({item, index}) => (
+                  <GuessLogItem guess={item} roundNumber={guessRoundsLength - index}/>
+              )}
+              style={styles.list}
+          />
+        </View>
       </View>
   );
 }
@@ -102,5 +105,12 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
+  },
+  listWr: {
+    flex: 1,
+  },
+  list: {
+    marginTop: 24,
   }
+  
 })
