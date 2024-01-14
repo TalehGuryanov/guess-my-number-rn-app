@@ -9,6 +9,7 @@ export const InstructionText = ({children, style}) => {
 
 const styles = StyleSheet.create({
   text: {
+    fontFamily: 'montserrat-regular',
     color: COLORS.secondary,
     fontSize: 24,
   }

@@ -9,8 +9,8 @@ export const Title = ({ children }) => {
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: 'montserrat-bold',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
     color: COLORS.secondary,
     marginBottom: 16,

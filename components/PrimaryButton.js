@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonText: {
+    fontFamily: 'montserrat-regular',
     color: COLORS.white,
     textAlign: 'center',
   },
