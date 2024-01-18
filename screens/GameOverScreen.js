@@ -11,7 +11,6 @@ export const GameOverScreen = ({rounds, userNumber, onRestart}) => {
   let imageSize = 300;
   
   const imageStyles = useMemo(() => {
-    console.log(width, height);
     if (width < 430) {
       imageSize = 150;
     }
